@@ -1,0 +1,36 @@
+{
+    "name": "langgraphjs",
+    "version": "1.0.0",
+    "main": "index.js",
+    "type": "module",
+    "scripts": {
+        "test": "echo \"Error: no test specified\" && exit 1",
+        "render-mermaid": "tsx ./src/render-mermaid.ts",
+        "dev": "tsx ./src/index.ts"
+    },
+    "keywords": [],
+    "author": "",
+    "license": "ISC",
+    "description": "",
+    "dependencies": {
+        "@langchain/anthropic": "^0.3.15",
+        "@langchain/community": "^0.3.34",
+        "@langchain/core": "^0.3.42",
+        "@langchain/langgraph": "^0.2.52",
+        "@langchain/langgraph-cli": "^0.0.13",
+        "@langchain/openai": "^0.4.4",
+        "@types/cors": "^2.8.17",
+        "@types/express": "^5.0.0",
+        "cors": "^2.8.5",
+        "dotenv": "^16.4.7",
+        "express": "^4.21.2",
+        "zod": "^3.24.2"
+    },
+    "devDependencies": {
+        "@types/node": "^22.11.18",
+        "prettier": "^3.5.3",
+        "tslab": "^1.0.22",
+        "tsx": "^4.19.3",
+        "typescript": "^5.8.2"
+    }
+}
