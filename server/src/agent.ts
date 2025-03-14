@@ -1,16 +1,32 @@
 import { AIMessage, HumanMessage } from '@langchain/core/messages';
+import { tool } from '@langchain/core/tools';
 import { TavilySearchResults } from '@langchain/community/tools/tavily_search';
 import { ChatOpenAI } from '@langchain/openai';
 import { MemorySaver, MessagesAnnotation, StateGraph, START, END } from '@langchain/langgraph';
 import { createReactAgent, ToolNode } from '@langchain/langgraph/prebuilt';
+import { z } from 'zod';
 
 import dotenv from 'dotenv';
 
 dotenv.config();
-// Define the tools for the agent to use
-const tools = [new TavilySearchResults({ maxResults: 3 })];
-const toolNode = new ToolNode(tools);
 
+const getData = tool(
+    async (input) => {
+        return 'data';
+    },
+    {
+        name: 'getData',
+        description: 'Get data about a thing',
+        schema: z.object({
+            url: z.string(),
+        }),
+    },
+);
+
+// Define the tools for the agent to use
+const tools = [new TavilySearchResults({ maxResults: 3 }), getData];
+
+const toolNode = new ToolNode(tools);
 const memorySaver = new MemorySaver();
 
 // Create a model and give it access to the tools
@@ -49,6 +65,6 @@ const workflow = new StateGraph(MessagesAnnotation)
 
 // Finally, we compile it into a LangChain Runnable.
 // the name of the export must be the same as what come after the path to this filename in langgraph.json
-export const app = workflow.compile({
+export const agent = workflow.compile({
     checkpointer: memorySaver,
 });

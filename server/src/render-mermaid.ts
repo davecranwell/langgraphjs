@@ -1,4 +1,4 @@
-import { app as agent } from './index.js';
+import { agent } from './agent.js';
 import * as fs from 'fs/promises';
 import { dirname, join } from 'path';
 
